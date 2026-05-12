@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Geek Squad — Device Triage System</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo-block">
+        <div class="gs-badge">GS</div>
+        <div>
+          <div class="site-title">GEEK SQUAD</div>
+          <div class="site-sub">Device Triage System · Agent Console</div>
+        </div>
+      </div>
+      <div class="header-meta">
+        <span id="live-clock"></span>
+        <span class="agent-id">AGENT: <strong id="agent-display">---</strong></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN LAYOUT -->
+  <main class="main-layout">
+
+    <!-- LEFT: INTAKE FORM -->
+    <section class="intake-panel">
+      <div class="panel-header">
+        <span class="panel-label">NEW INTAKE</span>
+        <span class="panel-tag">STEP 1 OF 4</span>
+      </div>
+
+      <form id="triage-form" novalidate>
+
+        <!-- STEP 1: Agent -->
+        <div class="form-section" id="step-agent">
+          <h3 class="step-title"><span class="step-num">01</span> Agent Information</h3>
+          <div class="field-group">
+            <label for="agent-name">Agent Name <span class="req">*</span></label>
+            <input type="text" id="agent-name" placeholder="e.g. A. Rodriguez" autocomplete="off" required />
+          </div>
+          <div class="field-group">
+            <label for="store-id">Store # <span class="req">*</span></label>
+            <input type="text" id="store-id" placeholder="e.g. 1047" autocomplete="off" required />
+          </div>
+        </div>
+
+        <div class="form-divider"></div>
+
+        <!-- STEP 2: Customer -->
+        <div class="form-section" id="step-customer">
+          <h3 class="step-title"><span class="step-num">02</span> Customer Details</h3>
+          <div class="field-row">
+            <div class="field-group">
+              <label for="cust-first">First Name <span class="req">*</span></label>
+              <input type="text" id="cust-first" placeholder="First" required />
+            </div>
+            <div class="field-group">
+              <label for="cust-last">Last Name <span class="req">*</span></label>
+              <input type="text" id="cust-last" placeholder="Last" required />
+            </div>
+          </div>
+          <div class="field-group">
+            <label for="cust-phone">Phone Number <span class="req">*</span></label>
+            <input type="tel" id="cust-phone" placeholder="(555) 000-0000" required />
+          </div>
+          <div class="field-group">
+            <label for="cust-email">Email Address</label>
+            <input type="email" id="cust-email" placeholder="customer@email.com" />
+          </div>
+          <div class="field-group">
+            <label>Protection Plan / TPA?</label>
+            <div class="toggle-row">
+              <label class="toggle-opt"><input type="radio" name="protection" value="none" checked /> None</label>
+              <label class="toggle-opt"><input type="radio" name="protection" value="gsp" /> Geek Squad Protection</label>
+              <label class="toggle-opt"><input type="radio" name="protection" value="tpa" /> Third-Party Warranty</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-divider"></div>
+
+        <!-- STEP 3: Device -->
+        <div class="form-section" id="step-device">
+          <h3 class="step-title"><span class="step-num">03</span> Device Information</h3>
+          <div class="field-row">
+            <div class="field-group">
+              <label for="device-type">Device Type <span class="req">*</span></label>
+              <select id="device-type" required>
+                <option value="">— Select —</option>
+                <option value="laptop">Laptop / Notebook</option>
+                <option value="desktop">Desktop / Tower</option>
+                <option value="phone">Smartphone</option>
+                <option value="tablet">Tablet</option>
+                <option value="tv">Television</option>
+                <option value="printer">Printer</option>
+                <option value="console">Gaming Console</option>
+                <option value="wearable">Wearable / Smartwatch</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label for="device-brand">Brand <span class="req">*</span></label>
+              <select id="device-brand" required>
+                <option value="">— Select —</option>
+                <option>Apple</option>
+                <option>Samsung</option>
+                <option>Dell</option>
+                <option>HP</option>
+                <option>Lenovo</option>
+                <option>ASUS</option>
+                <option>Microsoft</option>
+                <option>Sony</option>
+                <option>LG</option>
+                <option>Google</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field-group">
+              <label for="device-model">Model / Series</label>
+              <input type="text" id="device-model" placeholder="e.g. MacBook Pro 14 (2023)" />
+            </div>
+            <div class="field-group">
+              <label for="device-serial">Serial / IMEI</label>
+              <input type="text" id="device-serial" placeholder="S/N or IMEI" />
+            </div>
+          </div>
+          <div class="field-group">
+            <label>Physical Condition on Arrival</label>
+            <div class="toggle-row">
+              <label class="toggle-opt"><input type="radio" name="condition" value="like-new" checked /> Like New</label>
+              <label class="toggle-opt"><input type="radio" name="condition" value="minor-wear" /> Minor Wear</label>
+              <label class="toggle-opt"><input type="radio" name="condition" value="cracked" /> Cracked / Dents</label>
+              <label class="toggle-opt"><input type="radio" name="condition" value="liquid" /> Liquid Damage</label>
+            </div>
+          </div>
+          <div class="checkbox-row">
+            <label class="check-opt"><input type="checkbox" id="data-backup" /> Customer has been advised to back up data before service</label>
+          </div>
+          <div class="checkbox-row">
+            <label class="check-opt"><input type="checkbox" id="password-provided" /> Password / PIN provided for diagnostic access</label>
+          </div>
+        </div>
+
+        <div class="form-divider"></div>
+
+        <!-- STEP 4: Issue -->
+        <div class="form-section" id="step-issue">
+          <h3 class="step-title"><span class="step-num">04</span> Issue & Triage</h3>
+          <div class="field-group">
+            <label for="issue-category">Issue Category <span class="req">*</span></label>
+            <select id="issue-category" required>
+              <option value="">— Select —</option>
+              <optgroup label="Hardware">
+                <option value="screen-damage">Screen Damage / Cracked Display</option>
+                <option value="battery">Battery / Power Issue</option>
+                <option value="charging">Won't Charge / Charging Port</option>
+                <option value="keyboard">Keyboard / Trackpad</option>
+                <option value="liquid-damage">Liquid Damage</option>
+                <option value="hardware-other">Other Hardware</option>
+              </optgroup>
+              <optgroup label="Software / OS">
+                <option value="wont-boot">Won't Boot / Black Screen</option>
+                <option value="slow">Slow Performance</option>
+                <option value="virus">Virus / Malware Suspected</option>
+                <option value="os-reinstall">OS Reinstall / Recovery</option>
+                <option value="software-other">Other Software</option>
+              </optgroup>
+              <optgroup label="Data & Connectivity">
+                <option value="data-recovery">Data Recovery / Backup</option>
+                <option value="wifi">Wi-Fi / Network Issues</option>
+                <option value="bluetooth">Bluetooth Issues</option>
+                <option value="setup">New Device Setup / Transfer</option>
+              </optgroup>
+            </select>
+          </div>
+          <div class="field-group">
+            <label for="issue-desc">Customer-Reported Issue <span class="req">*</span> <span class="field-hint">(use customer's own words)</span></label>
+            <textarea id="issue-desc" rows="3" placeholder='e.g. "My laptop won't turn on after I spilled water on it last night."' required></textarea>
+          </div>
+          <div class="field-group">
+            <label for="agent-notes">Agent Diagnostic Notes</label>
+            <textarea id="agent-notes" rows="2" placeholder="Initial visual inspection, observable symptoms, attempted quick tests..."></textarea>
+          </div>
+
+          <div class="field-group">
+            <label>Severity / Priority <span class="req">*</span></label>
+            <div class="severity-row">
+              <label class="sev-card sev-low">
+                <input type="radio" name="severity" value="low" required />
+                <div class="sev-dot dot-low"></div>
+                <div>
+                  <div class="sev-label">LOW</div>
+                  <div class="sev-desc">Non-urgent · 5–7 days</div>
+                </div>
+              </label>
+              <label class="sev-card sev-medium">
+                <input type="radio" name="severity" value="medium" />
+                <div class="sev-dot dot-medium"></div>
+                <div>
+                  <div class="sev-label">MEDIUM</div>
+                  <div class="sev-desc">Standard · 2–4 days</div>
+                </div>
+              </label>
+              <label class="sev-card sev-critical">
+                <input type="radio" name="severity" value="critical" />
+                <div class="sev-dot dot-critical"></div>
+                <div>
+                  <div class="sev-label">CRITICAL</div>
+                  <div class="sev-desc">Urgent · Same / next day</div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="repair-estimate">Estimated Repair Time</label>
+            <select id="repair-estimate">
+              <option value="same-day">Same Day (4–6 hrs)</option>
+              <option value="next-day">Next Business Day</option>
+              <option value="2-3-days" selected>2–3 Business Days</option>
+              <option value="5-7-days">5–7 Business Days</option>
+              <option value="pending-parts">Pending Parts / TBD</option>
+              <option value="send-in">Send-In Required (10–14 days)</option>
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label for="service-type">Service Type</label>
+            <div class="toggle-row">
+              <label class="toggle-opt"><input type="radio" name="service-type" value="in-store" checked /> In-Store</label>
+              <label class="toggle-opt"><input type="radio" name="service-type" value="send-in" /> Send-In</label>
+              <label class="toggle-opt"><input type="radio" name="service-type" value="in-home" /> In-Home</label>
+              <label class="toggle-opt"><input type="radio" name="service-type" value="remote" /> Remote Support</label>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          <span class="btn-icon">▶</span> GENERATE WORK ORDER &amp; RECEIPT
+        </button>
+
+      </form>
+    </section>
+
+    <!-- RIGHT: QUEUE + RECEIPT -->
+    <section class="output-panel">
+
+      <!-- RECEIPT AREA -->
+      <div id="receipt-area" class="receipt-area hidden">
+        <div class="panel-header">
+          <span class="panel-label">CUSTOMER RECEIPT</span>
+          <button id="print-btn" class="icon-btn" title="Print receipt">⎙ PRINT</button>
+        </div>
+        <div id="receipt-card" class="receipt-card"></div>
+      </div>
+
+      <!-- TICKET QUEUE -->
+      <div class="queue-panel">
+        <div class="panel-header">
+          <span class="panel-label">OPEN TICKET QUEUE</span>
+          <div class="queue-meta">
+            <span id="queue-count" class="badge-count">0 open</span>
+            <button id="clear-resolved-btn" class="ghost-btn">Clear Resolved</button>
+          </div>
+        </div>
+        <div id="ticket-queue" class="ticket-queue">
+          <div class="empty-state">No tickets yet. Submit an intake form to get started.</div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>Geek Squad Device Triage System · Best Buy Co., Inc.</span>
+    <span>Built by <strong>Alessandra Claro</strong> — 2026</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
